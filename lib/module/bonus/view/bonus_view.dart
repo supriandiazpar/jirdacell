@@ -19,6 +19,12 @@ class BonusView extends StatelessWidget {
           appBar: AppBar(
             title: const Text("Klaim Bonus Anda"),
             actions: [
+              IconButton(
+                onPressed: () => controller.testUpdateSaldo(),
+                icon: const Icon(
+                  Icons.bug_report,
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: StreamBuilder<DocumentSnapshot>(
@@ -42,24 +48,27 @@ class BonusView extends StatelessWidget {
             child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection("bonus")
-                    .where("uid", isEqualTo: dataUser.uid).where("status", isEqualTo: 1)
+                    .where("uid", isEqualTo: dataUser.uid)
+                    .where("status", isEqualTo: 1)
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) return const Text("Error");
-                  if (!snapshot.hasData) return const Text("Kumpulkan Bonus Dengan Terus Belanja");
+                  if (!snapshot.hasData)
+                    return const Text("Kumpulkan Bonus Dengan Terus Belanja");
                   final data = snapshot.data!;
                   return ListView.builder(
                     itemCount: data.docs.length,
                     itemBuilder: (context, index) {
                       var item = (data.docs[index].data() as Map);
                       controller.docBonus = data.docs[index].id;
-                     controller.addBonus = item["bonus"];
+                      controller.addBonus = item["bonus"];
                       return Card(
                         child: ListTile(
                           title: Text("${item["keterangan"]}"),
                           subtitle: Text("Rp. ${item["bonus"]}"),
-                          trailing: ElevatedButton(onPressed: () => controller.doKlaim(),
-                          child: const Text("Klaim")),
+                          trailing: ElevatedButton(
+                              onPressed: () => controller.doKlaim(),
+                              child: const Text("Klaim")),
                         ),
                       );
                     },

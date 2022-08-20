@@ -36,13 +36,21 @@ class BonusController extends GetxController {
     }
   }
 
+  void testUpdateSaldo() async {
+    await profileUser.update({
+      "saldo": FieldValue.increment(1000),
+    });
+  }
+
   void doKlaim() async {
     try {
       await FirebaseFirestore.instance
           .collection("bonus")
           .doc(docBonus)
           .update({"status": 0});
+
       uProfile();
+
       Get.snackbar("Sukses", "Periksa Saldo Anda",
           backgroundColor: Colors.green[300]);
     } on FirebaseException catch (e) {

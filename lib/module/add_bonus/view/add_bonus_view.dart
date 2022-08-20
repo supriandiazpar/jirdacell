@@ -48,9 +48,9 @@ class AddBonusView extends StatelessWidget {
                             itemCount: data.docs.length,
                             itemBuilder: (context, index) {
                               var item = (data.docs[index].data() as Map);
-                          controller.textUid.text = data.docs[index].id;
-                          controller.textTelepon.text= item["telepon"];
-                          controller.textNama.text= item["nama"];
+                              controller.textUid.text = data.docs[index].id;
+                              controller.textTelepon.text = item["telepon"];
+                              controller.textNama.text = item["nama"];
                               return Card(
                                 child: Padding(
                                   padding: const EdgeInsets.all(15.0),
@@ -58,26 +58,25 @@ class AddBonusView extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                       TextField(
+                                      TextField(
                                         controller: controller.textNama,
                                         readOnly: true,
                                         decoration: const InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            ),
+                                          border: OutlineInputBorder(),
+                                        ),
                                       ),
                                       const SizedBox(
                                         height: 12.0,
                                       ),
-
                                       TextField(
                                         controller: controller.textTelepon,
                                         readOnly: true,
                                         decoration: const InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            ),
+                                          border: OutlineInputBorder(),
+                                        ),
                                       ),
                                       const SizedBox(
-                                          height: 12.0,
+                                        height: 12.0,
                                       ),
                                       TextField(
                                         controller: controller.textKeterangan,
@@ -99,8 +98,9 @@ class AddBonusView extends StatelessWidget {
                                         height: 12.0,
                                       ),
                                       ElevatedButton(
-                                          onPressed: () =>controller.doSave(),
-                                          child: const Text("Kirim"))
+                                        onPressed: () => controller.doSave(),
+                                        child: const Text("Kirim"),
+                                      )
                                     ],
                                   ),
                                 ),
