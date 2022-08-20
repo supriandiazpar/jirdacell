@@ -28,8 +28,8 @@ class BonusController extends GetxController {
   uProfile() async {
     try {
       final saldoSekarang = await profileUser.get();
-      saldoSekarang.data({"saldo"});
-      
+      //saldoSekarang.data({"saldo"});
+
       profileUser.update({"saldo": addBonus});
     } catch (e) {
       Get.snackbar("Error", e.toString());
