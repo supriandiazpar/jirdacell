@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "711862286055",
+    "project_id": "jirdacell",
+    "storage_bucket": "jirdacell.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711862286055:android:a1645e2596b51d1a489442",
+        "android_client_info": {
+          "package_name": "com.example.jc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711862286055-d105kpoo9jknj8o1oqjv4kh2741qt5lj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoRVWDScKFwLk26w7vOwoFRokdWY_y_j4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711862286055-d105kpoo9jknj8o1oqjv4kh2741qt5lj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

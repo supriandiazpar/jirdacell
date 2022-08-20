@@ -1,0 +1,21 @@
+{
+    "modules": [
+        "register",
+        "login",
+        "main_navigation",
+        "dashboard",
+        "profile",
+        "bonus",
+        "pulsa",
+        "pln",
+        "internet",
+        "produk",
+        "qrcode",
+        "login",
+        "register",
+        "edit_profile",
+        "add_bonus"
+
+
+    ]
+}
