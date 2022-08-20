@@ -19,12 +19,6 @@ class BonusView extends StatelessWidget {
           appBar: AppBar(
             title: const Text("Klaim Bonus Anda"),
             actions: [
-              IconButton(
-                onPressed: () => controller.testUpdateSaldo(),
-                icon: const Icon(
-                  Icons.bug_report,
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: StreamBuilder<DocumentSnapshot>(
@@ -53,8 +47,7 @@ class BonusView extends StatelessWidget {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) return const Text("Error");
-                  if (!snapshot.hasData)
-                    return const Text("Kumpulkan Bonus Dengan Terus Belanja");
+                  if (!snapshot.hasData)return const Text("Kumpulkan Bonus Anda");
                   final data = snapshot.data!;
                   return ListView.builder(
                     itemCount: data.docs.length,

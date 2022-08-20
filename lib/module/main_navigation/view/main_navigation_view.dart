@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jc/module/bonus/view/bonus_view.dart';
 import 'package:jc/module/dashboard/view/dashboard_view.dart';
 import 'package:jc/module/profile/view/profile_view.dart';
+import 'package:jc/module/transaksi/view/transaksi_view.dart';
 import '../controller/main_navigation_controller.dart';
 
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ class MainNavigationView extends StatelessWidget {
           body: SafeArea(
             child: IndexedStack(
               index: controller.tabIndex,
-              children: [DashboardView(),BonusView(),ProfileView()],
+              children: [DashboardView(),BonusView(),TransaksiView(), ProfileView()],
             ),
           ),
           bottomNavigationBar: BottomNavigationBar(
@@ -39,6 +40,10 @@ class MainNavigationView extends StatelessWidget {
               _bottomNavigationBarItem(
                 icon: Icons.auto_awesome_outlined ,
                 label: 'Bonus',
+              ),
+              _bottomNavigationBarItem(
+                icon: Icons.add_shopping_cart_rounded,
+                label: 'Transaksi',
               ),
               _bottomNavigationBarItem(
                 icon: Icons.person,

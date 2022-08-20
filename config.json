@@ -14,7 +14,8 @@
         "login",
         "register",
         "edit_profile",
-        "add_bonus"
+        "add_bonus",
+        "transaksi"
 
 
     ]

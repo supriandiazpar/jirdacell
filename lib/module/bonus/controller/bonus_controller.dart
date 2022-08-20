@@ -8,7 +8,6 @@ class BonusController extends GetxController {
   BonusView? view;
 
   int addBonus = 0;
-  int uSaldo = 0;
   String docBonus = "";
   @override
   void onInit() {
@@ -27,19 +26,12 @@ class BonusController extends GetxController {
 
   uProfile() async {
     try {
-      final saldoSekarang = await profileUser.get();
-      //saldoSekarang.data({"saldo"});
-
-      profileUser.update({"saldo": addBonus});
+      await profileUser.update({
+        "saldo": FieldValue.increment(addBonus),
+      });
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
-  }
-
-  void testUpdateSaldo() async {
-    await profileUser.update({
-      "saldo": FieldValue.increment(1000),
-    });
   }
 
   void doKlaim() async {
@@ -50,7 +42,6 @@ class BonusController extends GetxController {
           .update({"status": 0});
 
       uProfile();
-
       Get.snackbar("Sukses", "Periksa Saldo Anda",
           backgroundColor: Colors.green[300]);
     } on FirebaseException catch (e) {
