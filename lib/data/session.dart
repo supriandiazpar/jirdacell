@@ -8,3 +8,9 @@ get dataUser {
 DocumentReference get profileUser {
   return FirebaseFirestore.instance.collection("users").doc(dataUser.uid);
 }
+
+// DocumentReference get getSaldo {
+//   final doc = FirebaseFirestore.instance.collection("users").doc(dataUser.uid);
+//  final data =  doc.get();
+//   data.data(as Map<String, dynamic>;
+// }

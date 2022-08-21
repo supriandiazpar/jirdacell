@@ -47,7 +47,6 @@ class RegisterController extends GetxController {
      
     } on FirebaseException catch (e) {
       Get.snackbar("Kesalahan", e.toString(), backgroundColor: Colors.red[400]);
-      print(e);
     }
   }
 

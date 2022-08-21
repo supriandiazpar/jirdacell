@@ -23,6 +23,7 @@ class ProfileController extends GetxController {
 
   void doLogout() async {
     await  FirebaseAuth.instance.signOut();
+    Get.deleteAll();
     Get.offAll(const LoginView());
   }
 }

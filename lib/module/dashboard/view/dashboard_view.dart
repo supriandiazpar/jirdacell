@@ -43,35 +43,48 @@ class DashboardView extends StatelessWidget {
                               height: 150,
                               decoration:
                                   const BoxDecoration(color: Colors.deepPurple),
-                              child: Row(
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 20),
-                                    child: Text(
-                                      "Rp. ",
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      "Saldo",
                                       style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                                        fontSize: 18.0,
+                                        color: Colors.white
+                                      ),
                                     ),
-                                  ),
-                                  StreamBuilder<DocumentSnapshot>(
-                                      stream: profileUser.snapshots(),
-                                      builder: (context, snapshot) {
-                                        if (snapshot.hasError) return  const Text("Ada Kesalahan");
-                                        if (!snapshot.hasData) return const Text("No Data");
-                                        Map item =
-                                            (snapshot.data!.data() as Map);
-                                        return Text(
-                                          '${item["saldo"]}',
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                          ),
-                                        );
-                                      })
-                                ],
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Rp.",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        StreamBuilder<DocumentSnapshot>(
+                                            stream: profileUser.snapshots(),
+                                            builder: (context, snapshot) {
+                                              if (snapshot.hasError) return  const Text("Ada Kesalahan");
+                                              if (!snapshot.hasData) return const Text("No Data");
+                                              Map item =
+                                                  (snapshot.data!.data() as Map);
+                                              return Text(
+                                                '${item["saldo"]}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20,
+                                                ),
+                                              );
+                                            })
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             Positioned(

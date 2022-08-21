@@ -20,7 +20,7 @@ class BonusView extends StatelessWidget {
             title: const Text("Klaim Bonus Anda"),
             actions: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: StreamBuilder<DocumentSnapshot>(
                     stream: profileUser.snapshots(),
                     builder: (context, snapshot) {
@@ -47,7 +47,7 @@ class BonusView extends StatelessWidget {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) return const Text("Error");
-                  if (!snapshot.hasData)return const Text("Kumpulkan Bonus Anda");
+                  if (!snapshot.hasData) return const Text("No Data");
                   final data = snapshot.data!;
                   return ListView.builder(
                     itemCount: data.docs.length,

@@ -10,9 +10,5 @@ extension FirebaseExtension on FirebaseAuth {
     while (ready == false) {
       await Future.delayed(const Duration(milliseconds: 250));
     }
-
-    print(
-        "FirebaseAuth.instance.currentUser: ${FirebaseAuth.instance.currentUser != null}");
-    print("Firebase OK!");
   }
 }

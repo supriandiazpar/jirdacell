@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../controller/pulsa_controller.dart';
 
 import 'package:get/get.dart';
 
 class PulsaView extends StatelessWidget {
+  const PulsaView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PulsaController>(
@@ -17,32 +20,40 @@ class PulsaView extends StatelessWidget {
           ),
           body: Container(
             padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: const <Widget> [
-                 Card(
-                  child: ListTile(
-                    title: Text('Telkomsel 5k'),
-                    subtitle: Text("5500"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                  ),
-                ),
-                Card(
-                  child: ListTile(
-                    title: Text('Telkomsel 10k'),
-                    subtitle: Text("10500"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                  ),
-                ),
-                Card(
-                  child: ListTile(
-                    title: Text('Telkomsel 15k',),
-                    subtitle: Text("15500"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                  ),
-                ),
-              ],
-            ),
-            
+            child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection("produk")
+                    .where("kategori", isEqualTo: "Pulsa")
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) return const Text("Error");
+                  if (!snapshot.hasData) return const Text("No Data");
+                  final data = snapshot.data!;
+                  return ListView.builder(
+                    itemCount: data.docs.length,
+                    itemBuilder: (context, index) {
+                      var item = (data.docs[index].data() as Map);
+                      return Card(
+                        child: ListTile(
+                          title: Text("${item["nama_produk"]}"),
+                          subtitle: Text("Rp. ${item["harga"]}"),
+                          trailing: ElevatedButton(
+                              onPressed: () => Get.defaultDialog(
+                                title: "Pembelian",
+                                middleText: "${item["nama_produk"]}",
+                                cancel: ElevatedButton(
+                                  onPressed: ()=> Get.back(),
+                                  child: const Text("Batal")),
+                                  confirm: ElevatedButton(
+                                    onPressed: ()=> controller.beliPulsa(item["harga"]),
+                                    child: const Text("Ya"),)
+                              ),
+                              child: const Text("Beli")),
+                        ),
+                      );
+                    },
+                  );
+                }),
           ),
         );
       },

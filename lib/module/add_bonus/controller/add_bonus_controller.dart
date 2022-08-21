@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jc/data/session.dart';
 import '../view/add_bonus_view.dart';
 
 class AddBonusController extends GetxController {
@@ -32,6 +33,7 @@ class AddBonusController extends GetxController {
     try {
      await FirebaseFirestore.instance.collection("bonus").add({
         "uid": textUid.text,
+        "admin" :dataUser.email,
         "nama": textNama.text,
         "telepon": textTelepon.text,
         "keterangan": textKeterangan.text,

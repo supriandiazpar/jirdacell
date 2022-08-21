@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:jc/data/session.dart';
 import '../controller/transaksi_controller.dart';
 
 import 'package:get/get.dart';
@@ -17,15 +19,30 @@ class TransaksiView extends StatelessWidget {
           appBar: AppBar(
             title: const Text("Transaksi"),
           ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: const [
-                  //body
-                ],
-              ),
-            ),
+          body: Container(
+            padding: const EdgeInsets.all(10.0),
+            child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection("transaksi").where("uid", isEqualTo: dataUser.uid)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) return const Text("Error");
+                  if (!snapshot.hasData) return const Text("No Data");
+                  final data = snapshot.data!;
+                  return ListView.builder(
+                    itemCount: data.docs.length,
+                    itemBuilder: (context, index) {
+                      var item = (data.docs[index].data() as Map);
+                      return Card(
+                        child: ListTile(
+                          title: Text("${item["keterangan"]}"),
+                          subtitle: Text("Rp. ${item["harga"]}"),
+                          trailing: Text("${item["status"]}", style: TextStyle(color: Colors.green, )),
+                        ),
+                      );
+                    },
+                  );
+                }),
           ),
         );
       },

@@ -7,7 +7,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:jc/module/login/view/login_view.dart';
 import 'package:jc/module/main_navigation/view/main_navigation_view.dart';
 import 'package:jc/utilites/fire_util.dart';
-import 'package:jc/utilities/imageminversion.dart';
+import 'package:jc/utilites/imageminversion.dart';
 
 import 'firebase_options.dart';
 
