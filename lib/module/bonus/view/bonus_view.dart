@@ -53,14 +53,12 @@ class BonusView extends StatelessWidget {
                     itemCount: data.docs.length,
                     itemBuilder: (context, index) {
                       var item = (data.docs[index].data() as Map);
-                      controller.docBonus = data.docs[index].id;
-                      controller.addBonus = item["bonus"];
                       return Card(
                         child: ListTile(
                           title: Text("${item["keterangan"]}"),
                           subtitle: Text("Rp. ${item["bonus"]}"),
                           trailing: ElevatedButton(
-                              onPressed: () => controller.doKlaim(),
+                              onPressed: () => controller.doKlaim(data.docs[index].id, item["bonus"] ),
                               child: const Text("Klaim")),
                         ),
                       );

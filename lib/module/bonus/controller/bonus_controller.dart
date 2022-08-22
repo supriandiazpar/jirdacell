@@ -7,8 +7,6 @@ import '../view/bonus_view.dart';
 class BonusController extends GetxController {
   BonusView? view;
 
-  int addBonus = 0;
-  String docBonus = "";
   @override
   void onInit() {
     super.onInit();
@@ -24,25 +22,18 @@ class BonusController extends GetxController {
     super.onClose();
   }
 
-  uProfile() async {
-    try {
-      await profileUser.update({
-        "saldo": FieldValue.increment(addBonus),
-      });
-    } catch (e) {
-      Get.snackbar("Error", e.toString());
-    }
-  }
-
-  void doKlaim() async {
+  void doKlaim(String d, int b) async {
     try {
       await FirebaseFirestore.instance
           .collection("bonus")
-          .doc(docBonus)
+          .doc(d)
           .update({"status": 0});
 
-      uProfile();
-      Get.snackbar("Sukses", "Periksa Saldo Anda",
+      //add saldo
+      await profileUser.update({
+        "saldo": FieldValue.increment(b),
+      });
+      Get.snackbar("Sukses", "Saldo Sudah Ditambahkan",
           backgroundColor: Colors.green[300]);
     } on FirebaseException catch (e) {
       Get.snackbar("Error", e.toString());

@@ -37,10 +37,11 @@ class PulsaController extends GetxController {
           "uid": dataUser.uid,
           "email": dataUser.email,
           "harga": hargaPulsa,
-          "keterangan": "Pembelian Pulsa"
+          "keterangan": "Pembelian Pulsa",
+          "status": "Sedang Diproses"
         });
         Get.back();
-      Get.snackbar("Sukses", "Menunggu Proses Admin",
+      Get.snackbar("Sukses", "Akan Segera Diproses",
           backgroundColor: Colors.green[400]);
       }
       else {

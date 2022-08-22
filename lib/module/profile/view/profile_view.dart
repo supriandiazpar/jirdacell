@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:jc/data/session.dart';
 import 'package:jc/module/addproduk/view/addproduk_view.dart';
 import 'package:jc/module/edit_profile/view/edit_profile_view.dart';
-import 'package:jc/module/produk/view/produk_view.dart';
-import '../controller/profile_controller.dart';
 
 import 'package:get/get.dart';
+
+import '../controller/profile_controller.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
