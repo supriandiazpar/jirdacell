@@ -45,7 +45,7 @@ class PulsaView extends StatelessWidget {
                                   onPressed: ()=> Get.back(),
                                   child: const Text("Batal")),
                                   confirm: ElevatedButton(
-                                    onPressed: ()=> controller.beliPulsa(item["harga"]),
+                                    onPressed: ()=> controller.beliPulsa(item["harga"], item["nama_produk"]),
                                     child: const Text("Ya"),)
                               ),
                               child: const Text("Beli")),

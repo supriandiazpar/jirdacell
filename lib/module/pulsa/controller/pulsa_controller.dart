@@ -7,7 +7,6 @@ import '../view/pulsa_view.dart';
 class PulsaController extends GetxController {
   PulsaView? view;
 
-  int hargaPulsa = 0;
   int saldo = 0;
 
   @override
@@ -25,7 +24,7 @@ class PulsaController extends GetxController {
     super.onClose();
   }
 
-  void beliPulsa(int hargaPulsa) async {
+  void beliPulsa(int hargaPulsa, String produk) async {
     try {
       final doc = profileUser;
       final data = await doc.get();

@@ -14,6 +14,14 @@ class AddBonusController extends GetxController {
   late TextEditingController textBonus = TextEditingController();
   late TextEditingController textUid = TextEditingController();
 
+  late List<String> items = <String>[
+    "Pembelian Pulsa",
+    "Pembelian Paket Internet",
+    "Pembelian Token",
+    "Kembalian Uang"
+  ];
+  RxString kategoriValue = "Pembelian Pulsa".obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -36,7 +44,7 @@ class AddBonusController extends GetxController {
         "admin" :dataUser.email,
         "nama": textNama.text,
         "telepon": textTelepon.text,
-        "keterangan": textKeterangan.text,
+        "keterangan": kategoriValue.toString(),
         "bonus": int.parse(textBonus.text),
         "tanggal": Timestamp.now(),
         "status": 1

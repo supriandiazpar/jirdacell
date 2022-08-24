@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jc/data/session.dart';
@@ -5,6 +7,7 @@ import 'package:jc/module/addproduk/view/addproduk_view.dart';
 import 'package:jc/module/edit_profile/view/edit_profile_view.dart';
 
 import 'package:get/get.dart';
+import 'package:jc/module/produkfisik/view/produkfisik_view.dart';
 
 import '../controller/profile_controller.dart';
 
@@ -89,57 +92,98 @@ class ProfileView extends StatelessWidget {
                       const SizedBox(
                         height: 15.0,
                       ),
-                      Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
+                      StreamBuilder<DocumentSnapshot>(
+                        stream: profileUser.snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) return const Text("Error");
+                      if (!snapshot.hasData) return const Text("anynom");
+                      Map item = (snapshot.data!.data()) as Map;
+                          return (item["status"] == 1) ? Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Column(
                                 children: [
-                                  Image.asset(
-                                    "assets/icon/produk_digital.png",
-                                    height: 50,
-                                    width: 50,
-                                  ),
+                                  const Text("Menu Admin", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                                   const SizedBox(
-                                    height: 8.0,
+                                      height: 15.0,
                                   ),
-                                  const Text(
-                                    "Add Admin",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  )
+                                  
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Image.asset(
+                                            "assets/icon/produk_digital.png",
+                                            height: 50,
+                                            width: 50,
+                                          ),
+                                          const SizedBox(
+                                            height: 8.0,
+                                          ),
+                                          const Text(
+                                            "Add Admin",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        width: 15.0,
+                                      ),
+                                      InkWell(
+                                        onTap: () => Get.to(const AddprodukView()),
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              "assets/icon/produk_fisik.png",
+                                              height: 50,
+                                              width: 50,
+                                            ),
+                                            const SizedBox(
+                                              height: 8.0,
+                                            ),
+                                            const Text(
+                                              "Produk Digital",
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 15.0,
+                                      ),
+                                      InkWell(
+                                        onTap: () => Get.to(const ProdukfisikView()),
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              "assets/icon/shopping.png",
+                                              height: 50,
+                                              width: 50,
+                                            ),
+                                            const SizedBox(
+                                              height: 8.0,
+                                            ),
+                                            const Text(
+                                              "Produk Fisik",
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
-                              const SizedBox(
-                                width: 15.0,
-                              ),
-                              InkWell(
-                                onTap: () => Get.to(const AddprodukView()),
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      "assets/icon/produk_fisik.png",
-                                      height: 50,
-                                      width: 50,
-                                    ),
-                                    const SizedBox(
-                                      height: 8.0,
-                                    ),
-                                    const Text(
-                                      "Add Produk",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                            ),
+                          ) : Container();
+                        }
                       ),
                     ],
                   );

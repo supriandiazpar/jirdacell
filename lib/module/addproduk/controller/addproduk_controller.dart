@@ -42,6 +42,7 @@ class AddprodukController extends GetxController {
         "admin": dataUser.email,
         "nama_produk": namaProduk.text,
         "kategori": kategoriValue.toString(),
+        "sub_kategori": "Produk Digital",
         "harga": int.parse(hargaProduk.text),
         "stock": int.parse(stockMasuk.text),
       });

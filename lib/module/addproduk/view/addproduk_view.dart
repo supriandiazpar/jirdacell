@@ -75,7 +75,7 @@ class AddprodukView extends StatelessWidget {
                       height: 12.0,
                   ),
                   const Text(
-                    "Harga Pulsa",
+                    "Harga",
                     style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,

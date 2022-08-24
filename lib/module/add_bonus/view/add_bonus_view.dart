@@ -78,11 +78,23 @@ class AddBonusView extends StatelessWidget {
                                       const SizedBox(
                                         height: 12.0,
                                       ),
-                                      TextField(
-                                        controller: controller.textKeterangan,
-                                        decoration: const InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            labelText: "Pembelian"),
+                                      Obx(
+                                        () => DropdownButton<String>(
+                                          onChanged: (String? newValue) {
+                                            controller.kategoriValue.value =
+                                                newValue!;
+                                          },
+                                          value: controller.kategoriValue.value,
+                                          items: controller.items
+                                              .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value),
+                                              );
+                                            },
+                                          ).toList(),
+                                        ),
                                       ),
                                       const SizedBox(
                                         height: 12.0,
