@@ -56,7 +56,7 @@ class BonusView extends StatelessWidget {
                       return Card(
                         child: ListTile(
                           title: Text("${item["keterangan"]}"),
-                          subtitle: Text("Rp. ${item["bonus"]}"),
+                          subtitle: Text("Point ${item["bonus"]}"),
                           trailing: ElevatedButton(
                               onPressed: () => controller.doKlaim(data.docs[index].id, item["bonus"] ),
                               child: const Text("Klaim")),

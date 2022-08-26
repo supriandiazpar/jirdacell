@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:jc/data/session.dart';
 import 'package:jc/module/internet/view/internet_view.dart';
 import 'package:jc/module/pln/view/pln_view.dart';
@@ -20,6 +20,9 @@ class DashboardView extends StatelessWidget {
       init: DashboardController(),
       builder: (controller) {
         controller.view = this;
+
+        DateTime tglfull = Timestamp.now().toDate();
+        String tglPromo = DateFormat('yyyy-MM-dd').format(tglfull);
 
         return Scaffold(
           appBar: AppBar(
@@ -221,68 +224,111 @@ class DashboardView extends StatelessWidget {
                 ),
               ),
               Card(
-                child: SizedBox(
-                  height: 200,
-                  width: Get.width / 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: Text(
-                          "Promo Hari Ini",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        "Promo Hari Ini",
+                        style: TextStyle(
+                            fontSize: 20),
                       ),
-                      Center(
-                        child: Image.asset(
-                          'assets/image/promo_default.png',
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                    StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection("promo")
+                            .where("tanggal_promo", isEqualTo: tglPromo)
+                            .limit(1)
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return const Text("Error");
+                          }
+                          if (!snapshot.hasData) {
+                            return Center(
+                                child: Image.asset(
+                              'assets/image/promo_default.png',
+                            ));
+                          }
+                          print(tglPromo);
+                          final data = snapshot.data!;
+                          var item = (data.docs.first.data() as Map);
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              child: ListTile(
+                                title: Text(
+                                  "${item["judul_promo"]}",
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                    "${item["tanggal_promo"]} - ${item["ket_promo"]}",
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                    )),
+                                trailing: Image.asset(
+                                  'assets/icon/open-box.png',
+                                  height: 80,
+                                  width: 80,
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                  ],
                 ),
               ),
               Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         "Promo Akan Datang",
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                            fontSize: 20),
                       ),
-                        StreamBuilder<QuerySnapshot>(
-                            stream: FirebaseFirestore.instance
-                                .collection("promo")
-                                .orderBy("tanggal_promo")
-                                .limit(1)
-                                .snapshots(),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasError) {
-                                return const Text("Error");
-                              }
-                              if (!snapshot.hasData) {
-                                return const Text("No Data");
-                              }
-                              final data = snapshot.data!;
-                              var item = (data.docs.first.data() as Map);
-                              return Card(
-                                child: ListTile(
-                                  title: Text("${item["judul_promo"]}", style: const TextStyle(fontSize: 18,),),
-                                  subtitle: Text("${item["tanggal_promo"]} - ${item["ket_promo"]}", style: const TextStyle(fontSize: 16,)),
-                                  trailing: Image.asset(
-                                          'assets/icon/kotak_kado.png',
-                                          height: 80,
-                                          width: 80,
-                                        ),
+                      StreamBuilder<QuerySnapshot>(
+                          stream: FirebaseFirestore.instance
+                              .collection("promo")
+                              .orderBy("tanggal_promo")
+                              .limit(1)
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return const Text("Error");
+                            }
+                            if (!snapshot.hasData) {
+                              return const Text("No Data");
+                            }
+                            final data = snapshot.data!;
+                            var item = (data.docs.first.data() as Map);
+                            return Card(
+                              child: ListTile(
+                                title: Text(
+                                  "${item["judul_promo"]}",
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                  ),
                                 ),
-                              );
-                            }),
-                   ],
+                                subtitle: Text(
+                                    "${item["tanggal_promo"]} - ${item["ket_promo"]}",
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                    )),
+                                trailing: Image.asset(
+                                  'assets/icon/kotak_kado.png',
+                                  height: 80,
+                                  width: 80,
+                                ),
+                              ),
+                            );
+                          }),
+                    ],
                   ),
                 ),
               )

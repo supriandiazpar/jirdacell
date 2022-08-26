@@ -45,7 +45,7 @@ class PulsaController extends GetxController {
       }
       else {
         Get.back();
-        Get.snackbar("Warning!!", "Saldo Anda Tidak Cukup", backgroundColor: Colors.red[400]);
+        Get.snackbar("Warning!!", "Point Anda Tidak Cukup", backgroundColor: Colors.red[400]);
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());

@@ -4,9 +4,9 @@ import '../view/dashboard_view.dart';
 class DashboardController extends GetxController {
   DashboardView? view;
 
-
   @override
   void onInit() async {
+    
     super.onInit();
   }
 

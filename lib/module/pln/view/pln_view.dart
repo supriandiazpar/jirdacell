@@ -36,10 +36,10 @@ class PlnView extends StatelessWidget {
                       return Card(
                         child: ListTile(
                           title: Text("${item["nama_produk"]}"),
-                          subtitle: Text("Rp. ${item["harga"]}"),
+                          subtitle: Text("${item["harga"]} Point"),
                           trailing: ElevatedButton(
                               onPressed: () => Get.defaultDialog(
-                                title: "Beli Produk ?",
+                                title: "Tukar Point",
                                 middleText: "${item["nama_produk"]}",
                                 cancel: ElevatedButton(
                                   onPressed: ()=> Get.back(),
@@ -48,7 +48,7 @@ class PlnView extends StatelessWidget {
                                     onPressed: ()=> controller.beliToken(item["harga"], item["nama_produk"]),
                                     child: const Text("Ya"),)
                               ),
-                              child: const Text("Beli")),
+                              child: const Text("Tukar")),
                         ),
                       );
                     },
