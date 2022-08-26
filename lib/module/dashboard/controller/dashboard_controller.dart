@@ -4,8 +4,9 @@ import '../view/dashboard_view.dart';
 class DashboardController extends GetxController {
   DashboardView? view;
 
+
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
   }
 
@@ -18,4 +19,5 @@ class DashboardController extends GetxController {
   void onClose() {
     super.onClose();
   }
+
 }

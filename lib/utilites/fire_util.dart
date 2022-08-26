@@ -8,7 +8,7 @@ extension FirebaseExtension on FirebaseAuth {
     });
 
     while (ready == false) {
-      await Future.delayed(const Duration(milliseconds: 250));
+      await Future.delayed(const Duration(milliseconds: 100));
     }
   }
 }

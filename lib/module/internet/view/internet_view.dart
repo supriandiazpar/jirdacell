@@ -16,7 +16,7 @@ class InternetView extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Token PLN Promo"),
+            title: const Text("Promo Paket Internet"),
           ),
           body: Container(
             padding: const EdgeInsets.all(10.0),

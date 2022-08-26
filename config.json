@@ -18,7 +18,9 @@
         "transaksi",
         "addpulsa",
         "addproduk",
-        "produkfisik"
+        "produkfisik",
+        "prosestransaksi",
+        "promo"
 
 
 

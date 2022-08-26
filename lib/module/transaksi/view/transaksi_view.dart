@@ -37,12 +37,14 @@ class TransaksiView extends StatelessWidget {
                         child: ListTile(
                           title: Text("${item["keterangan"]}"),
                           subtitle: Text("Rp. ${item["harga"]}"),
-                          trailing: Text("${item["status"]}", style: TextStyle(color: Colors.green, )),
+                          trailing: Text("${item["status"]}",
+                          style: TextStyle(color: item["status"] =="Selesai" ? Colors.green : Colors.red, )),
                         ),
                       );
                     },
                   );
-                }),
+                }
+                ),
           ),
         );
       },
