@@ -21,13 +21,20 @@ class DashboardView extends StatelessWidget {
       builder: (controller) {
         controller.view = this;
 
+        double widthdevice = MediaQuery.of(context).size.width;
+        double hightdevice = MediaQuery.of(context).size.height;
+
+        AppBar myAppbar() {
+          return AppBar(
+            title: const Text("Jirda Cell"),
+          );
+        }
+
         DateTime tglfull = Timestamp.now().toDate();
         String tglPromo = DateFormat('yyyy-MM-dd').format(tglfull);
 
         return Scaffold(
-          appBar: AppBar(
-            title: const Text("Jirda Cell"),
-          ),
+          appBar: myAppbar(),
           body: SingleChildScrollView(
               child: Column(
             children: [
@@ -38,12 +45,14 @@ class DashboardView extends StatelessWidget {
                     Stack(
                       children: [
                         Container(
-                          height: 210,
+                          width: widthdevice,
+                          height: hightdevice * 0.32,
                           decoration:
                               const BoxDecoration(color: Colors.transparent),
                         ),
                         Container(
-                          height: 150,
+                          width: widthdevice,
+                          height: hightdevice * 0.25,
                           decoration:
                               const BoxDecoration(color: Colors.deepPurple),
                           child: Padding(
@@ -86,11 +95,11 @@ class DashboardView extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          top: 100,
+                          top: hightdevice * 0.15,
                           left: 15,
                           right: 15,
                           child: SizedBox(
-                            height: 100,
+                            height: hightdevice * 0.15,
                             child: Card(
                               elevation: 2,
                               child: Row(
@@ -231,8 +240,7 @@ class DashboardView extends StatelessWidget {
                       padding: EdgeInsets.all(10.0),
                       child: Text(
                         "Promo Hari Ini",
-                        style: TextStyle(
-                            fontSize: 20),
+                        style: TextStyle(fontSize: 20),
                       ),
                     ),
                     StreamBuilder<QuerySnapshot>(
@@ -251,7 +259,6 @@ class DashboardView extends StatelessWidget {
                               'assets/image/promo_default.png',
                             ));
                           }
-                          print(tglPromo);
                           final data = snapshot.data!;
                           var item = (data.docs.first.data() as Map);
                           return Padding(
@@ -289,8 +296,7 @@ class DashboardView extends StatelessWidget {
                     children: [
                       const Text(
                         "Promo Akan Datang",
-                        style: TextStyle(
-                            fontSize: 20),
+                        style: TextStyle(fontSize: 20),
                       ),
                       StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance
