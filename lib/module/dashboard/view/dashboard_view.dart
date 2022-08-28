@@ -243,17 +243,23 @@ class DashboardView extends StatelessWidget {
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
-                    StreamBuilder<QuerySnapshot>(
+                    StreamBuilder<QuerySnapshot<Object?>>(
                         stream: FirebaseFirestore.instance
                             .collection("promo")
                             .where("tanggal_promo", isEqualTo: tglPromo)
                             .limit(1)
                             .snapshots(),
-                        builder: (context, snapshot) {
+                        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                           if (snapshot.hasError) {
                             return const Text("Error");
                           }
-                          if (!snapshot.hasData) {
+                           if (snapshot.data!.docs.isEmpty) {
+                            return Center(
+                                child: Image.asset(
+                              'assets/image/promo_default.png',
+                            ));
+                          }
+                           if (!snapshot.hasData) {
                             return Center(
                                 child: Image.asset(
                               'assets/image/promo_default.png',
@@ -308,6 +314,9 @@ class DashboardView extends StatelessWidget {
                             if (snapshot.hasError) {
                               return const Text("Error");
                             }
+                            if (snapshot.data!.docs.isEmpty) {
+                            return const Text("Tidak Ada Promo");
+                          } 
                             if (!snapshot.hasData) {
                               return const Text("No Data");
                             }
