@@ -29,6 +29,7 @@ class DashboardView extends StatelessWidget {
             title: const Text("Jirda Cell"),
           );
         }
+        double hightbody = hightdevice - myAppbar().preferredSize.height;
 
         DateTime tglfull = Timestamp.now().toDate();
         String tglPromo = DateFormat('yyyy-MM-dd').format(tglfull);
@@ -36,312 +37,311 @@ class DashboardView extends StatelessWidget {
         return Scaffold(
           appBar: myAppbar(),
           body: SingleChildScrollView(
-              child: Column(
-            children: [
-              SizedBox(
-                height: 210,
+              child: Container(
+                padding: const EdgeInsets.all(0.0),
+                height: hightbody,
                 child: Column(
+            children: [
+                Stack(
                   children: [
-                    Stack(
-                      children: [
-                        Container(
-                          width: widthdevice,
-                          height: hightdevice * 0.32,
-                          decoration:
-                              const BoxDecoration(color: Colors.transparent),
-                        ),
-                        Container(
-                          width: widthdevice,
-                          height: hightdevice * 0.25,
-                          decoration:
-                              const BoxDecoration(color: Colors.deepPurple),
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                    Container(
+                      width: widthdevice,
+                      height: hightbody * 0.30,
+                      decoration:
+                          const BoxDecoration(color: Colors.transparent),
+                    ),
+                    Container(
+                      width: widthdevice,
+                      height: hightbody * 0.25,
+                      decoration:
+                          const BoxDecoration(color: Colors.deepPurple),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Point Anda",
+                              style: TextStyle(
+                                  fontSize: 16.0, color: Colors.white),
+                            ),
+                            Row(
                               children: [
-                                const Text(
-                                  "Point Anda",
-                                  style: TextStyle(
-                                      fontSize: 16.0, color: Colors.white),
-                                ),
-                                Row(
-                                  children: [
-                                    StreamBuilder<DocumentSnapshot>(
-                                        stream: profileUser.snapshots(),
-                                        builder: (context, snapshot) {
-                                          if (snapshot.hasError) {
-                                            return const Text("Ada Kesalahan");
-                                          }
-                                          if (!snapshot.hasData) {
-                                            return const Text("0");
-                                          }
-                                          Map item =
-                                              (snapshot.data!.data() as Map);
-                                          return Text(
-                                            '${item["saldo"]}',
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20,
-                                            ),
-                                          );
-                                        })
-                                  ],
-                                ),
+                                StreamBuilder<DocumentSnapshot>(
+                                    stream: profileUser.snapshots(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasError) {
+                                        return const Text("Ada Kesalahan");
+                                      }
+                                      if (!snapshot.hasData) {
+                                        return const Text("0");
+                                      }
+                                      Map item =
+                                          (snapshot.data!.data() as Map);
+                                      return Text(
+                                        '${item["saldo"]}',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      );
+                                    })
                               ],
                             ),
-                          ),
+                          ],
                         ),
-                        Positioned(
-                          top: hightdevice * 0.15,
-                          left: 15,
-                          right: 15,
-                          child: SizedBox(
-                            height: hightdevice * 0.15,
-                            child: Card(
-                              elevation: 2,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  InkWell(
-                                    onTap: () => Get.to(const PulsaView()),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          'assets/icon/pulsa.png',
-                                          height: 30,
-                                          width: 30,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        const Text(
-                                          'Pulsa',
-                                          style: TextStyle(
-                                              fontSize: 13.0,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 15.0,
-                                  ),
-                                  InkWell(
-                                    onTap: () => Get.to(const PlnView()),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          'assets/icon/pln.png',
-                                          height: 30,
-                                          width: 30,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        const Text(
-                                          'PLN',
-                                          style: TextStyle(
-                                              fontSize: 13.0,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 15.0,
-                                  ),
-                                  InkWell(
-                                    onTap: () => Get.to(const InternetView()),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          'assets/icon/internet.png',
-                                          height: 30,
-                                          width: 30,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        const Text(
-                                          'Internet',
-                                          style: TextStyle(
-                                              fontSize: 13.0,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 15.0,
-                                  ),
-                                  InkWell(
-                                    onTap: () => Get.to(const ProdukView()),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          'assets/icon/shopping.png',
-                                          height: 30,
-                                          width: 30,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        const Text(
-                                          'Belanja',
-                                          style: TextStyle(
-                                              fontSize: 13.0,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 15.0,
-                                  ),
-                                  InkWell(
-                                    onTap: () => Get.to(QrcodeView()),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          'assets/icon/qrcode.png',
-                                          height: 30,
-                                          width: 30,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        const Text(
-                                          'QR Code',
-                                          style: TextStyle(
-                                              fontSize: 13.0,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Card(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Text(
-                        "Promo Hari Ini",
-                        style: TextStyle(fontSize: 20),
                       ),
                     ),
-                    StreamBuilder<QuerySnapshot<Object?>>(
-                        stream: FirebaseFirestore.instance
-                            .collection("promo")
-                            .where("tanggal_promo", isEqualTo: tglPromo)
-                            .limit(1)
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.active) {
-                            if (snapshot.hasError) {
-                              return const Text("Error");
-                            } else if (snapshot.data!.docs.isEmpty) {
-                              return Center(
-                                  child: Image.asset(
-                                'assets/image/promo_default.png',
-                              ));
-                            } else if (!snapshot.hasData) {
-                              return Center(
-                                  child: Image.asset(
-                                'assets/image/promo_default.png',
-                              ));
-                            } else 
-                            if (snapshot.data!.docs.isNotEmpty) {
-                              final data = snapshot.data!;
-                              var item = (data.docs.first.data() as Map);
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Card(
-                                  child: ListTile(
-                                    title: Text(
-                                      "${item["judul_promo"]}",
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                      ),
+                    Positioned(
+                      top: hightbody * 0.15,
+                      left: 15,
+                      right: 15,
+                      child: SizedBox(
+                        height: hightbody * 0.15,
+                        child: Card(
+                          elevation: 2,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () => Get.to(const PulsaView()),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/icon/pulsa.png',
+                                      height: 30,
+                                      width: 30,
                                     ),
-                                    subtitle: Text(
-                                        "${item["tanggal_promo"]} - ${item["ket_promo"]}",
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                        )),
-                                    trailing: Image.asset(
-                                      'assets/icon/open-box.png',
-                                      height: 80,
-                                      width: 80,
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'Pulsa',
+                                      style: TextStyle(
+                                          fontSize: 13.0,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              );
-                            }
-                            else {
-                              return const Text("Ada Kesalahan");
-                            }
-                          } else {
-                            return const CircularProgressIndicator();
-                          }
-                        }),
+                              ),
+                              const SizedBox(
+                                width: 15.0,
+                              ),
+                              InkWell(
+                                onTap: () => Get.to(const PlnView()),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/icon/pln.png',
+                                      height: 30,
+                                      width: 30,
+                                    ),
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'PLN',
+                                      style: TextStyle(
+                                          fontSize: 13.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 15.0,
+                              ),
+                              InkWell(
+                                onTap: () => Get.to(const InternetView()),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/icon/internet.png',
+                                      height: 30,
+                                      width: 30,
+                                    ),
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'Internet',
+                                      style: TextStyle(
+                                          fontSize: 13.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 15.0,
+                              ),
+                              InkWell(
+                                onTap: () => Get.to(const ProdukView()),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/icon/shopping.png',
+                                      height: 30,
+                                      width: 30,
+                                    ),
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'Belanja',
+                                      style: TextStyle(
+                                          fontSize: 13.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 15.0,
+                              ),
+                              InkWell(
+                                onTap: () => Get.to(QrcodeView()),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/icon/qrcode.png',
+                                      height: 30,
+                                      width: 30,
+                                    ),
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'QR Code',
+                                      style: TextStyle(
+                                          fontSize: 13.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              ),
+                Container(
+                  padding: const EdgeInsets.all(0.0),
+                  width: widthdevice,
+                  height: hightbody * 0.35,
+                  child: Card(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "Promo Hari Ini",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        StreamBuilder<QuerySnapshot<Object?>>(
+                            stream: FirebaseFirestore.instance
+                                .collection("promo")
+                                .where("tanggal_promo", isEqualTo: tglPromo)
+                                .limit(1)
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.active) {
+                                if (snapshot.hasError) {
+                                  return const Text("Error");
+                                } else if (snapshot.data!.docs.isEmpty) {
+                                  return Center(
+                                      child: Image.asset(
+                                    'assets/image/promo_default.png',
+                                  ));
+                                } else if (!snapshot.hasData) {
+                                  return Center(
+                                      child: Image.asset(
+                                    'assets/image/promo_default.png',
+                                  ));
+                                } else 
+                                if (snapshot.data!.docs.isNotEmpty) {
+                                  final data = snapshot.data!;
+                                  var item = (data.docs.first.data() as Map);
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Card(
+                                      child: ListTile(
+                                        title: Text(
+                                          "${item["judul_promo"]}",
+                                          style: const TextStyle(
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        subtitle: Text(
+                                            "${item["tanggal_promo"]} - ${item["ket_promo"]}",
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                            )),
+                                        trailing: Image.asset(
+                                          'assets/icon/open-box.png',
+                                          height: 80,
+                                          width: 80,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                else {
+                                  return const Text("Ada Kesalahan");
+                                }
+                              } else {
+                                return const Center(child: CircularProgressIndicator());
+                              }
+                            }),
+                      ],
+                    ),
+                  ),
+                ),
 
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Promo Akan Datang",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      StreamBuilder<QuerySnapshot>(
-                          stream: FirebaseFirestore.instance
-                              .collection("promo")
-                              .orderBy("tanggal_promo")
-                              .limit(1)
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.active) {
-                            if (snapshot.hasError) {
-                              return const Text("Error");
-                            } else if (snapshot.data!.docs.isEmpty) {
-                              return Center(
-                                  child: Image.asset(
-                                'assets/image/promo_default.png',
-                              ));
-                            } else if (!snapshot.hasData) {
-                              return Center(
-                                  child: Image.asset(
-                                'assets/image/promo_default.png',
-                              ));
-                            } else 
-                            if (snapshot.data!.docs.isNotEmpty) {
-                              final data = snapshot.data!;
-                              var item = (data.docs.first.data() as Map);
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Card(
-                                  child: ListTile(
+                Expanded(
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Promo Akan Datang",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection("promo")
+                                  .orderBy("tanggal_promo")
+                                  .limit(1)
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.active) {
+                                if (snapshot.hasError) {
+                                  return const Text("Error");
+                                } else if (snapshot.data!.docs.isEmpty) {
+                                  return Center(
+                                      child: Image.asset(
+                                    'assets/image/promo_default.png',
+                                  ));
+                                } else if (!snapshot.hasData) {
+                                  return Center(
+                                      child: Image.asset(
+                                    'assets/image/promo_default.png',
+                                  ));
+                                } else 
+                                if (snapshot.data!.docs.isNotEmpty) {
+                                  final data = snapshot.data!;
+                                  var item = (data.docs.first.data() as Map);
+                                  return ListTile(
                                     title: Text(
                                       "${item["judul_promo"]}",
                                       style: const TextStyle(
@@ -358,24 +358,24 @@ class DashboardView extends StatelessWidget {
                                       height: 80,
                                       width: 80,
                                     ),
-                                  ),
-                                ),
-                              );
-                            }
-                            else {
-                              return const Text("Ada Kesalahan");
-                            }
-                          } else {
-                            return const CircularProgressIndicator();
-                          }
-                        }),
-                    ],
+                                  );
+                                }
+                                else {
+                                  return const Text("Ada Kesalahan");
+                                }
+                              } else {
+                                return const Center(child: CircularProgressIndicator());
+                              }
+                            }),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              )
+                )
             
             ],
-          )),
+          ),
+              )),
         );
       },
     );
