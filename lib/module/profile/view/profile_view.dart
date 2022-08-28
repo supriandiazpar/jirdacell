@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jc/data/session.dart';
 import 'package:jc/module/add_produk/view/addproduk_view.dart';
+import 'package:jc/module/admin_menu/view/admin_menu_view.dart';
 import 'package:jc/module/edit_profile/view/edit_profile_view.dart';
 
 import 'package:get/get.dart';
@@ -101,144 +102,17 @@ class ProfileView extends StatelessWidget {
                           if (!snapshot.hasData) return const Text("anynom");
                           Map item = (snapshot.data!.data()) as Map;
                               return (item["status"] == 1) ?
-                              Card(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Column(
-                                    children: [
-                                      const Text("Menu Admin", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                                      const SizedBox(
-                                          height: 15.0,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Image.asset(
-                                                "assets/icon/produk_digital.png",
-                                                height: 50,
-                                                width: 50,
-                                              ),
-                                              const SizedBox(
-                                                height: 8.0,
-                                              ),
-                                              const Text(
-                                                "Add Admin",
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            width: 15.0,
-                                          ),
-                                          InkWell(
-                                            onTap: () => Get.to(const AddprodukView()),
-                                            child: Column(
-                                              children: [
-                                                Image.asset(
-                                                  "assets/icon/produk_fisik.png",
-                                                  height: 50,
-                                                  width: 50,
-                                                ),
-                                                const SizedBox(
-                                                  height: 8.0,
-                                                ),
-                                                const Text(
-                                                  "Produk Digital",
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 15.0,
-                                          ),
-                                          InkWell(
-                                            onTap: () => Get.to(const ProdukfisikView()),
-                                            child: Column(
-                                              children: [
-                                                Image.asset(
-                                                  "assets/icon/menu_produk.png",
-                                                  height: 50,
-                                                  width: 50,
-                                                ),
-                                                const SizedBox(
-                                                  height: 8.0,
-                                                ),
-                                                const Text(
-                                                  "Produk Fisik",
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                          height: 15.0,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                           InkWell(
-                                            onTap: () => Get.to(const ProsestransaksiView()),
-                                            child: Column(
-                                              children: [
-                                                Image.asset(
-                                                  "assets/icon/menu_transaksi.png",
-                                                  height: 50,
-                                                  width: 50,
-                                                ),
-                                                const SizedBox(
-                                                  height: 8.0,
-                                                ),
-                                                const Text(
-                                                  "Transaksi",
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                              width: 15.0,
-                                          ),
-                                          
-                                          InkWell(
-                                            onTap: () => Get.to(const PromoView()),
-                                            child: Column(
-                                              children: [
-                                                Image.asset(
-                                                  "assets/icon/menu_promo.png",
-                                                  height: 50,
-                                                  width: 50,
-                                                ),
-                                                const SizedBox(
-                                                  height: 8.0,
-                                                ),
-                                                const Text(
-                                                  "Add Promo",
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
+                              ElevatedButton(
+                                onPressed: ()=> Get.to(const AdminMenuView()),
+                                child: const Text(
+                                  "Menu Admin",
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ) : Container();
+                                )
+                                 : Container();
                             }
                           ),
                         ],

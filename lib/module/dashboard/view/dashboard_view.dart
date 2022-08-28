@@ -249,51 +249,60 @@ class DashboardView extends StatelessWidget {
                             .where("tanggal_promo", isEqualTo: tglPromo)
                             .limit(1)
                             .snapshots(),
-                        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                          if (snapshot.hasError) {
-                            return const Text("Error");
-                          }
-                           if (snapshot.data!.docs.isEmpty) {
-                            return Center(
-                                child: Image.asset(
-                              'assets/image/promo_default.png',
-                            ));
-                          }
-                           if (!snapshot.hasData) {
-                            return Center(
-                                child: Image.asset(
-                              'assets/image/promo_default.png',
-                            ));
-                          }
-                          final data = snapshot.data!;
-                          var item = (data.docs.first.data() as Map);
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Card(
-                              child: ListTile(
-                                title: Text(
-                                  "${item["judul_promo"]}",
-                                  style: const TextStyle(
-                                    fontSize: 18,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.active) {
+                            if (snapshot.hasError) {
+                              return const Text("Error");
+                            } else if (snapshot.data!.docs.isEmpty) {
+                              return Center(
+                                  child: Image.asset(
+                                'assets/image/promo_default.png',
+                              ));
+                            } else if (!snapshot.hasData) {
+                              return Center(
+                                  child: Image.asset(
+                                'assets/image/promo_default.png',
+                              ));
+                            } else 
+                            if (snapshot.data!.docs.isNotEmpty) {
+                              final data = snapshot.data!;
+                              var item = (data.docs.first.data() as Map);
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                  child: ListTile(
+                                    title: Text(
+                                      "${item["judul_promo"]}",
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    subtitle: Text(
+                                        "${item["tanggal_promo"]} - ${item["ket_promo"]}",
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                        )),
+                                    trailing: Image.asset(
+                                      'assets/icon/open-box.png',
+                                      height: 80,
+                                      width: 80,
+                                    ),
                                   ),
                                 ),
-                                subtitle: Text(
-                                    "${item["tanggal_promo"]} - ${item["ket_promo"]}",
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                    )),
-                                trailing: Image.asset(
-                                  'assets/icon/open-box.png',
-                                  height: 80,
-                                  width: 80,
-                                ),
-                              ),
-                            ),
-                          );
+                              );
+                            }
+                            else {
+                              return const Text("Ada Kesalahan");
+                            }
+                          } else {
+                            return const CircularProgressIndicator();
+                          }
                         }),
                   ],
                 ),
               ),
+
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -311,42 +320,60 @@ class DashboardView extends StatelessWidget {
                               .limit(1)
                               .snapshots(),
                           builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.active) {
                             if (snapshot.hasError) {
                               return const Text("Error");
-                            }
-                            if (snapshot.data!.docs.isEmpty) {
-                            return const Text("Tidak Ada Promo");
-                          } 
-                            if (!snapshot.hasData) {
-                              return const Text("No Data");
-                            }
-                            final data = snapshot.data!;
-                            var item = (data.docs.first.data() as Map);
-                            return Card(
-                              child: ListTile(
-                                title: Text(
-                                  "${item["judul_promo"]}",
-                                  style: const TextStyle(
-                                    fontSize: 18,
+                            } else if (snapshot.data!.docs.isEmpty) {
+                              return Center(
+                                  child: Image.asset(
+                                'assets/image/promo_default.png',
+                              ));
+                            } else if (!snapshot.hasData) {
+                              return Center(
+                                  child: Image.asset(
+                                'assets/image/promo_default.png',
+                              ));
+                            } else 
+                            if (snapshot.data!.docs.isNotEmpty) {
+                              final data = snapshot.data!;
+                              var item = (data.docs.first.data() as Map);
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                  child: ListTile(
+                                    title: Text(
+                                      "${item["judul_promo"]}",
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    subtitle: Text(
+                                        "${item["tanggal_promo"]} - ${item["ket_promo"]}",
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                        )),
+                                    trailing: Image.asset(
+                                      'assets/icon/kotak_kado.png',
+                                      height: 80,
+                                      width: 80,
+                                    ),
                                   ),
                                 ),
-                                subtitle: Text(
-                                    "${item["tanggal_promo"]} - ${item["ket_promo"]}",
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                    )),
-                                trailing: Image.asset(
-                                  'assets/icon/kotak_kado.png',
-                                  height: 80,
-                                  width: 80,
-                                ),
-                              ),
-                            );
-                          }),
+                              );
+                            }
+                            else {
+                              return const Text("Ada Kesalahan");
+                            }
+                          } else {
+                            return const CircularProgressIndicator();
+                          }
+                        }),
                     ],
                   ),
                 ),
               )
+            
             ],
           )),
         );
