@@ -8,6 +8,7 @@ class ProdukController extends GetxController {
   ProdukView? view;
 
   int saldo = 0;
+  String cariProduk = "";
 
   @override
   void onInit() {
