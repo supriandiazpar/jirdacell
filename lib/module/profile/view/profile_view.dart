@@ -1,15 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jc/data/session.dart';
-import 'package:jc/module/add_produk/view/addproduk_view.dart';
 import 'package:jc/module/admin_menu/view/admin_menu_view.dart';
 import 'package:jc/module/edit_profile/view/edit_profile_view.dart';
-
 import 'package:get/get.dart';
-import 'package:jc/module/produk_fisik/view/produkfisik_view.dart';
-import 'package:jc/module/promo/view/promo_view.dart';
-import 'package:jc/module/proses_transaksi/view/prosestransaksi_view.dart';
-
 import '../controller/profile_controller.dart';
 
 class ProfileView extends StatelessWidget {

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -33,11 +35,10 @@ class ProdukView extends StatelessWidget {
                   child: Card(
                     child: TextField(
                       decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.search),
-                        hintText: "Cari Produk"
-                      ),
-                      onSubmitted: (text){
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.search),
+                          hintText: "Cari Produk"),
+                      onSubmitted: (text) {
                         controller.cariProduk = text;
                         controller.update();
                       },
@@ -45,32 +46,37 @@ class ProdukView extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: StreamBuilder<QuerySnapshot>(
+                  child: StreamBuilder<QuerySnapshot<Object?>>(
                       stream: FirebaseFirestore.instance
                           .collection("produk")
                           .where("sub_kategori", isEqualTo: "Produk Fisik")
                           .snapshots(),
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.active) {
-                          if (snapshot.hasError) {
-                            return const Text("Error");
+                        if (snapshot.connectionState == ConnectionState.active) {
+                          if (snapshot.hasError) { return const Text("Error");
                           } else if (!snapshot.hasData) {
                             return const Text("Tidak Ada Data");
-                          } else {
-                            final data = snapshot.data!;
-                            return GridView.builder(
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 0.8,
-                                ),
-                                itemCount: data.docs.length,
-                                itemBuilder: (context, index) {
-                                  var item = (data.docs[index].data() as Map);
-                                  if(controller.cariProduk.isNotEmpty){
-                                    if(item["nama_produk"].toString().toLowerCase().contains(controller.cariProduk.toLowerCase())){
-                                    return Container();}}
+                          }
+                          final filter = snapshot.data!.docs.where((element) =>
+                              (element.data()
+                                      as Map<String, dynamic>)["nama_produk"]
+                                  .toLowerCase()
+                                  .contains(controller.cariProduk));
+                          return GridView.builder(
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 0.8,
+                              ),
+                              itemCount: filter.length,
+                              itemBuilder: (context, index) {
+                                
+                                var item = (filter.elementAt(index));
+                                (item["nama_produk"].toLowerCase().contains(
+                                    controller.cariProduk.toLowerCase()));
+                                    if(snapshot.data!.docs.isEmpty){
+                                  return Container(child: Center(child: Text("cek cek", style: TextStyle(color: Colors.black),)));
+                                }
                                   return Card(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -90,7 +96,6 @@ class ProdukView extends StatelessWidget {
                                             const SizedBox(
                                               height: 12.0,
                                             ),
-
                                             Text(
                                               "${item["nama_produk"]}",
                                               style: const TextStyle(
@@ -129,8 +134,8 @@ class ProdukView extends StatelessWidget {
                                           ]),
                                     ),
                                   );
-                                });
-                          }
+                             
+                              });
                         } else {
                           return const Center(
                               child: CircularProgressIndicator());
