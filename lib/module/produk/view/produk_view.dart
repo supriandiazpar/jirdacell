@@ -52,31 +52,30 @@ class ProdukView extends StatelessWidget {
                           .where("sub_kategori", isEqualTo: "Produk Fisik")
                           .snapshots(),
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.active) {
-                          if (snapshot.hasError) { return const Text("Error");
-                          } else if (!snapshot.hasData) {
-                            return const Text("Tidak Ada Data");
-                          }
+                        if (snapshot.connectionState ==
+                            ConnectionState.active) {
                           final filter = snapshot.data!.docs.where((element) =>
                               (element.data()
                                       as Map<String, dynamic>)["nama_produk"]
                                   .toLowerCase()
-                                  .contains(controller.cariProduk));
-                          return GridView.builder(
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                childAspectRatio: 0.8,
-                              ),
-                              itemCount: filter.length,
-                              itemBuilder: (context, index) {
-                                
-                                var item = (filter.elementAt(index));
-                                (item["nama_produk"].toLowerCase().contains(
-                                    controller.cariProduk.toLowerCase()));
-                                    if(snapshot.data!.docs.isEmpty){
-                                  return Container(child: Center(child: Text("cek cek", style: TextStyle(color: Colors.black),)));
-                                }
+                                  .contains(controller.cariProduk.toLowerCase()));
+                          if (snapshot.hasError) {
+                            return const Text("Error");
+                          } else if (!snapshot.hasData) {
+                            return const Text("Tidak Ada Data");
+                          }
+                          if (filter.isNotEmpty == true) {
+                            return GridView.builder(
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 0.8,
+                                ),
+                                itemCount: filter.length,
+                                itemBuilder: (context, index) {
+                                  var item = (filter.elementAt(index));
+                                  (item["nama_produk"].toLowerCase().contains(
+                                      controller.cariProduk.toLowerCase()));
                                   return Card(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -134,8 +133,16 @@ class ProdukView extends StatelessWidget {
                                           ]),
                                     ),
                                   );
-                             
-                              });
+                                });
+                          } else {
+                            return const Center(
+                              child: Text(
+                                "Produk Tidak Ditemukan",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            );
+                          }
                         } else {
                           return const Center(
                               child: CircularProgressIndicator());

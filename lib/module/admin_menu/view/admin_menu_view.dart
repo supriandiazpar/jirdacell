@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jc/module/list_users/view/list_users_view.dart';
 import '../../add_produk/view/addproduk_view.dart';
 import '../../produk_fisik/view/produkfisik_view.dart';
 import '../../promo/view/promo_view.dart';
@@ -144,6 +145,28 @@ class AdminMenuView extends StatelessWidget {
                           ),
                           const Text(
                             "Add Promo",
+                            style: TextStyle(fontSize: 14),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () => Get.to(const ListUserView()),
+                    child: Card(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/icon/users.png",
+                            height: 50,
+                            width: 50,
+                          ),
+                          const SizedBox(
+                            height: 8.0,
+                          ),
+                          const Text(
+                            "List Users",
                             style: TextStyle(fontSize: 14),
                           )
                         ],
