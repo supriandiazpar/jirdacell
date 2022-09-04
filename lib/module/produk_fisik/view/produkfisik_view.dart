@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:jc/module/list_produk_fisik/view/list_produk_fisik_view.dart';
 import '../controller/produkfisik_controller.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +17,15 @@ class ProdukfisikView extends StatelessWidget {
         return Scaffold(
             appBar: AppBar(
               title: const Text("Tambah Produk Fisik"),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: InkWell(
+                    onTap: () => Get.to(const ListProdukFisikView()),
+                    child: const Icon(Icons.list),
+                  ),
+                )
+              ],
             ),
             body: Container(
               padding: const EdgeInsets.all(20.0),
@@ -154,7 +164,9 @@ class ProdukfisikView extends StatelessWidget {
                       height: 15.0,
                     ),
                     ElevatedButton(
-                      onPressed: () => controller.uploadImage(controller.namaProduk).then((url) {
+                      onPressed: () => controller
+                          .uploadImage(controller.namaProduk)
+                          .then((url) {
                         if (url != null) {
                           controller.saveProduk(url);
                         }

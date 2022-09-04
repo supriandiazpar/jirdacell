@@ -16,6 +16,9 @@ class AddprodukView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text("Tambah Produk"),
+            actions: [
+              Icon(Icons.list)
+            ],
           ),
           body: Container(
             padding: const EdgeInsets.all(20.0),

@@ -10,7 +10,6 @@ class EditProfileController extends GetxController {
   EditProfileView? view;
 
   late ImagePicker imagePicker;
-
   XFile? pickedImage;
 
   FirebaseStorage storage = FirebaseStorage.instance;

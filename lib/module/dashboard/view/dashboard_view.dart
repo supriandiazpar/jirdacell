@@ -271,24 +271,22 @@ class DashboardView extends StatelessWidget {
                                   var item = (data.docs.first.data() as Map);
                                   return Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Card(
-                                      child: ListTile(
-                                        title: Text(
-                                          "${item["judul_promo"]}",
+                                    child: ListTile(
+                                      title: Text(
+                                        "${item["judul_promo"]}",
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                          "${item["tanggal_promo"]} - ${item["ket_promo"]}",
                                           style: const TextStyle(
-                                            fontSize: 18,
-                                          ),
-                                        ),
-                                        subtitle: Text(
-                                            "${item["tanggal_promo"]} - ${item["ket_promo"]}",
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                            )),
-                                        trailing: Image.asset(
-                                          'assets/icon/open-box.png',
-                                          height: 80,
-                                          width: 80,
-                                        ),
+                                            fontSize: 16,
+                                          )),
+                                      trailing: Image.asset(
+                                        'assets/icon/open-box.png',
+                                        height: 80,
+                                        width: 80,
                                       ),
                                     ),
                                   );
